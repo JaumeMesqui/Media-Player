@@ -3,8 +3,8 @@
 
 //Creació del element Video (Reproductor de Media)
 var video = document.createElement("video");
-video.setAttribute('width',"320");
-video.setAttribute('height',"240");
+video.setAttribute('width',"640");
+video.setAttribute('height',"340");
 
 //Fonts del video
 var sourceMP4 = document.createElement("source");
