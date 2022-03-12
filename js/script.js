@@ -5,7 +5,6 @@
 var video = document.createElement("video");
 video.setAttribute('width',"600");
 video.setAttribute('height',"320");
-video.setAttribute("controls",true);
 
 //Fonts del video
 var sourceMP4 = document.createElement("source");
@@ -23,7 +22,33 @@ video.appendChild(sourceMP4);
 video.appendChild(sourceOGG);
 video.appendChild(textAlt); 
 
-
 //Afegir el video al Index
 document.getElementById("mediaplayer").appendChild(video);
+
+//Boto de reproducció
+var buttonPlay = document.createElement("button");
+buttonPlay.setAttribute('width',"100");
+buttonPlay.setAttribute('height',"100");
+buttonPlay.innerHTML = "Play";
+
+buttonPlay.addEventListener("click", function () {
+    video.play();
+});
+
+//Afegir el video al Index
+document.getElementById("mediaplayer").appendChild(buttonPlay);
+
+//Boto de reproducció
+var buttonStop = document.createElement("button");
+buttonStop.setAttribute('width',"100");
+buttonStop.setAttribute('height',"100");
+buttonStop.innerHTML = "Stop";
+
+buttonStop.addEventListener("click", function () {
+    video.pause();
+});
+
+//Afegir el video al Index
+document.getElementById("mediaplayer").appendChild(buttonStop);
+
 
