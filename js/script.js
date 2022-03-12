@@ -3,8 +3,9 @@
 
 //Creació del element Video (Reproductor de Media)
 var video = document.createElement("video");
-video.setAttribute('width',"320");
-video.setAttribute('height',"240");
+video.setAttribute('width',"600");
+video.setAttribute('height',"320");
+video.setAttribute("controls",true);
 
 //Fonts del video
 var sourceMP4 = document.createElement("source");
@@ -17,11 +18,12 @@ sourceOGG.setAttribute('type',"video/ogg");
 
 var textAlt = document.createTextNode("Your browser does not support the video tag.");
 
-
 //Afegir les fonts y el text al video
 video.appendChild(sourceMP4);
 video.appendChild(sourceOGG);
-video.appendChild(textAlt); //InnerHTML he vist que es per escriure
+video.appendChild(textAlt); 
+
 
 //Afegir el video al Index
 document.getElementById("mediaplayer").appendChild(video);
+

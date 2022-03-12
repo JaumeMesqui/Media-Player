@@ -9,6 +9,11 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
+video {
+	padding-bottom: 0;
+	padding-top: 0;
+}
+
 .contenedor {
 	width: 90%;
 	max-width: 1000px;
