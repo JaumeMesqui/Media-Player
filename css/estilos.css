@@ -9,11 +9,6 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-video {
-	padding-bottom: 0;
-	padding-top: 0;
-}
-
 .contenedor {
 	width: 90%;
 	max-width: 1000px;
@@ -94,3 +89,41 @@ video {
 						 "footer footer footer";
 	}
 }
+
+.video-player {
+	max-width: 750px;
+	position: relative;
+	overflow: hidden;
+  }
+  
+.video {
+	width: 100%;
+}
+  
+.player-controls {
+	display: flex;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	transform: translateY(100%) translateY(-5px);
+	transition: 0.3s;
+	flex-wrap: wrap;
+	background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .video-player:hover .player-controls {
+	transform: translateY(0);
+  }
+  
+  .play-button {
+	width: 10%;
+	border: none;
+	background: black;
+	color: white;
+	padding: 10px;
+  }
+  
+  .play-button:focus {
+	outline: none;
+  }
+  
