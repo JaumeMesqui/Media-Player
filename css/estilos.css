@@ -80,6 +80,20 @@ body {
 	grid-area: footer;
 }
 
+/*VIDEO*/
+.video-player{
+	max-width: 750px;
+	position: relative;
+	overflow: hidden;
+}
+.video{
+	width: 100%;
+}
+
+.time {
+	font-size: 1em;
+}
+
 @media screen and (max-width: 768px){
 	.contenedor {
 		grid-template-areas: "header header header"
@@ -89,5 +103,3 @@ body {
 						 "footer footer footer";
 	}
 }
-
-  
