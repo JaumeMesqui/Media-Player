@@ -2,6 +2,7 @@
 //Creació del element Video (Reproductor de Media)
 var video = document.createElement("video");
 video.setAttribute('class',"video"); 
+video.setAttribute('poster',"media/poster.jpg"); 
 
 //Fonts del video
 var sourceMP4 = document.createElement("source");
@@ -22,10 +23,21 @@ video.appendChild(textAlt);
 //Afegir el video al Index
 document.getElementById("videoPlayer").appendChild(video);
 
-//Creació dels botons Play and pause / barra volumen / temps video --> playerControls
+//Creació de barra progrés, els botons Play and pause / barra volumen / temps video --> playerControls
 var playerControls = document.createElement("div");
 playerControls.setAttribute('class',"player-controls"); 
 
+//Creació de barra progrés
+var barraProgres = document.createElement("div");
+barraProgres.setAttribute('class',"video-progress"); 
+
+var progresCompletat = document.createElement("div");
+progresCompletat.setAttribute('class',"video-progress-filled");
+
+barraProgres.appendChild(progresCompletat);
+playerControls.appendChild(barraProgres);
+
+//Creació botons Play and pause 
 var playButton = document.createElement("button");
 playButton.setAttribute('class',"play-button"); 
 playButton.setAttribute('title',"Play");
@@ -55,7 +67,7 @@ valorTemps.setAttribute('class',"time");
 //Temps actual
 var tempsActual = document.createElement("span");
 tempsActual.setAttribute('class',"current");
-var texto2 = document.createTextNode('0:00 ');
+var texto2 = document.createTextNode('0:00-');
 tempsActual.appendChild(texto2);
 
 valorTemps.appendChild(tempsActual);
@@ -77,15 +89,11 @@ playerControls.appendChild(valorTemps);
 document.getElementById("videoPlayer").appendChild(playerControls);
 
 
-/*
-			
-*/
-
 //Funció per fer Play and pause al playButton
 playButton.addEventListener("click", (e) =>{ //per errors
     if(video.paused){
         video.play();
-        e.target.textContent = "⏸︎ ";
+        e.target.textContent = "❚ ❚";
         playButton.setAttribute('title',"Pause");
     }else{
         video.pause();
@@ -109,9 +117,23 @@ function currentTime(){
     var durationMinutes = Math.floor(video.duration / 60);
     var durationSeconds = Math.floor(video.duration - durationMinutes * 60);
 
-    tempsActual.innerHTML = `${currentMinutes }:${ currentSeconds < 10 ? "0"+currentSeconds : currentSeconds} `;
+    tempsActual.innerHTML = `${currentMinutes }:${ currentSeconds < 10 ? "0"+currentSeconds : currentSeconds}-`;
     duracioTemps.innerHTML = `${durationMinutes }:${ durationSeconds}`;
 }
 
 video.addEventListener("timeupdate", currentTime);
+
+
+//eventListener que va pintant la barra de progrés a mesura que es va reproduint el vídeo
+video.addEventListener("timeupdate", () =>{
+    const percentatge = (video.currentTime/ video.duration)* 100;
+    progresCompletat.style.width = `${percentatge}%`
+});
+
+//canviar la barra de progrés si clicam
+barraProgres.addEventListener("click", (e) =>{
+    const tempsAvanzado = (e.offsetX / barraProgres.offsetWidth) * video.duration;
+    video.currentTime = tempsAvanzado;
+});
+
 
