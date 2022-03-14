@@ -3,7 +3,8 @@
 
 //Creació del element Video (Reproductor de Media)
 var video = document.createElement("video");
-
+video.setAttribute('width',"640");
+video.setAttribute('height',"480");
 //Fonts del video
 var sourceMP4 = document.createElement("source");
 sourceMP4.setAttribute('src',"media/sabana.mp4"); 
