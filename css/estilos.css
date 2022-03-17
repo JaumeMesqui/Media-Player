@@ -119,7 +119,15 @@ background: rgba(0, 0, 0, 0.6);
 }
 
 .play-button{
-	width: 10%;
+	width: 5%;
+	border:none;
+	background: black;
+	color: white;
+	padding: 10px;
+}
+
+.buttonNou{
+	width: 5%;
 	border:none;
 	background: black;
 	color: white;

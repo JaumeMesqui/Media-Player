@@ -39,12 +39,21 @@ playerControls.appendChild(barraProgres);
 
 //Creació botons Play and pause 
 var playButton = document.createElement("button");
-playButton.setAttribute('class',"play-button"); 
+playButton.setAttribute('class',"buttonNou"); 
 playButton.setAttribute('title',"Play");
 var texto = document.createTextNode('►');
 playButton.appendChild(texto);
 
 playerControls.appendChild(playButton);
+
+//Creació botons Play and pause 
+var button2 = document.createElement("button");
+button2.setAttribute('class',"play-button"); 
+button2.setAttribute('title',"Play");
+var texto2 = document.createTextNode('+');
+button2.appendChild(texto2);
+
+playerControls.appendChild(button2);
 
 
 //Creació de la barra del volumen
@@ -93,7 +102,7 @@ document.getElementById("videoPlayer").appendChild(playerControls);
 playButton.addEventListener("click", (e) =>{ //per errors
     if(video.paused){
         video.play();
-        e.target.textContent = "❚ ❚";
+        e.target.textContent = "❚❚";
         playButton.setAttribute('title',"Pause");
     }else{
         video.pause();
