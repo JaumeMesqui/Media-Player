@@ -1,4 +1,3 @@
-
 //Creació del element Video (Reproductor de Media)
 var video = document.createElement("video");
 video.setAttribute('class',"video"); 
@@ -39,7 +38,7 @@ playerControls.appendChild(barraProgres);
 
 //Creació botons Play and pause 
 var playButton = document.createElement("button");
-playButton.setAttribute('class',"buttonNou"); 
+playButton.setAttribute('class',"play-button"); 
 playButton.setAttribute('title',"Play");
 var texto = document.createTextNode('►');
 playButton.appendChild(texto);
@@ -47,13 +46,13 @@ playButton.appendChild(texto);
 playerControls.appendChild(playButton);
 
 //Creació botons Play and pause 
-var button2 = document.createElement("button");
-button2.setAttribute('class',"play-button"); 
-button2.setAttribute('title',"Play");
+var forwardButton = document.createElement("button");
+forwardButton.setAttribute('class',"forward-button"); 
+forwardButton.setAttribute('title',"Play");
 var texto2 = document.createTextNode('+');
-button2.appendChild(texto2);
+forwardButton.appendChild(texto2);
 
-playerControls.appendChild(button2);
+playerControls.appendChild(forwardButton);
 
 
 //Creació de la barra del volumen
@@ -145,4 +144,6 @@ barraProgres.addEventListener("click", (e) =>{
     video.currentTime = tempsAvanzado;
 });
 
-
+forwardButton.addEventListener("click", (e) =>{
+    video.currentTime= video.currentTime+10;
+});
