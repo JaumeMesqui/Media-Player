@@ -45,7 +45,7 @@ playButton.appendChild(texto);
 
 playerControls.appendChild(playButton);
 
-//Creació botons Play and pause 
+//Creació boto per avançar vídeo 10 s
 var forwardButton = document.createElement("button");
 forwardButton.setAttribute('class',"forward-button"); 
 forwardButton.setAttribute('title',"Play");
@@ -144,6 +144,7 @@ barraProgres.addEventListener("click", (e) =>{
     video.currentTime = tempsAvanzado;
 });
 
+//adelantar vídeo 10 s
 forwardButton.addEventListener("click", (e) =>{
     video.currentTime= video.currentTime+10;
 });
