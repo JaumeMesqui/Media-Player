@@ -184,8 +184,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 	
 }
 /*https://ebweb.es/cajas-de-colores-con-html-y-css/ */
-.titolFormulari{
-	width:80%;
+.opcioPrincipalEditor{
+	width:78.5%;
 	background: #f7f5f5; 
 	color:rgb(0, 0, 0); 
 	font-weight: bold; 
@@ -235,7 +235,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 form {
 	width: 950px;
 	margin:auto;
-	background: rgba(0, 0, 0, 0.4);
+	margin-bottom: 20px;
+	background: rgba(0, 0, 0, 0.2);
 	padding: 10px 20px;
 	box-sizing: border-box;
 	border-radius: 10px;
@@ -252,7 +253,7 @@ input{
 
 .seccioBotonsFormularis{
 	display: flex;
-  justify-content: center;
+    justify-content: center;
 }
 
 .botoFormulari {
@@ -266,7 +267,6 @@ input{
 
 .botoFormulari:hover{
 	cursor: pointer;
-
 }
 
 /* RESPONSIVE */
