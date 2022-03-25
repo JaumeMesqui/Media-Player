@@ -3,7 +3,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     init();
-    //inserirTracks();
+    inserirTracks();
 
 })
 
@@ -160,76 +160,63 @@ function currentTime() {
     duracioTemps.innerHTML = `${durationMinutes}:${durationSeconds}`;
 }
 
-
 function inserirTracks() {
 
     var video = document.querySelector('video');
 
 
-    video.addEventListener("loadedmetadata", function() {
+    video.addEventListener("loadedmetadata", function () {
 
         var track = document.createElement("track");
         track.kind = "captions";
         track.label = "subtitols";
         track.srclang = "es";
         track.src = "vtt/dades.vtt";
-        track.addEventListener("load", function() {
-           this.mode = "showing";
-           video.textTracks[0].mode = "showing"; // thanks Firefox
+        track.addEventListener("load", function () {
+            this.mode = "showing";
+            video.textTracks[0].mode = "showing"; // thanks Firefox
+            obtenirDades();
         });
         this.appendChild(track);
-        obtenirDades();
-     });
+    });
 
 }
 
 function obtenirDades() {
     var video = document.querySelector('video');
 
-    var tracks = video.textTracks; 
-    for (var i = 0, L = tracks.length; i < L; i++) { 
-        tracks[i] = video.addTextTrack("subtitles", "subtitols", "es");
-        tracks[i].mode = "showing";
-        tracks[i].oncuechange = function (){
-            // "this" is a textTrack
-            var cue = this.activeCues[0]; // assuming there is only one
-            var data = JSON.parse(cue.text);
-            console.log(cue.text);
-            cue.onenter = function(){
-                console.log("hola")
-                // do somethingç
-                analizarCue(data);
-            };
+    var tracks = video.textTracks;
+    for (var i = 0, L = tracks.length; i < L; i++) {
+        tracks[i] = video.addTextTrack("metadata", "subtitols", "es");
+        tracks[i].mode = "hidden";
 
-            cue.onexit = function(){
-                // do something else
-            };
+        //Cas en es que se modifica el currentTime del video
+        tracks[i].oncuechange = function () {
+            var cue = this.activeCues[0];
+            if (cue != undefined) {
+                var data = JSON.parse(cue.text);
+                posarInfo(data);
+            } else {
+                borrarInfo();
+            }
         }
-        
-        var ques = tracks[i].cues;
-        console.log(ques);
-        console.log(ques.length);
-/*
-        for (var i = 0; i < ques.length; i++) { 
-            
-            var data = JSON.parse(ques[i]);
-
-            ques[i].onenter = function(){
-
-                // do somethingç
-                analizarCue(data);
-            };
-
-            ques[i].onexit = function(){
-                // do something else
-            };
-
-        }
-        */
     }
 
 }
 
-function analizarCue(data){
+function posarInfo(data) {
     console.log(data.nom);
+    var info1 = document.getElementById("info1");
+    var contingutInfo1 = document.createElement("h3");
+    var textInfo1 = document.createTextNode(data.nom);
+    contingutInfo1.appendChild(textInfo1);
+    info1.appendChild(contingutInfo1);
+}
+
+function borrarInfo() {
+    console.log("borrar");
+    var info1 = document.getElementById("info1");
+    while (info1.firstChild) {
+        info1.removeChild(info1.firstChild);
+    }
 }

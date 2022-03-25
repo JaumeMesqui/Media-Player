@@ -96,7 +96,7 @@ body {
 .video-player{
 	max-width: 750px;
 	position: relative;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 .video{
 	width: 100%;
@@ -107,10 +107,11 @@ body {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	transform: translateY(100%) translateY(-5px);
+	/*transform: translateY(100%) translateY(-5px);*/
+	transform: translateY(0);
 	transition: .3s;
 	flex-wrap: wrap;
-background: rgba(0, 0, 0, 0.6);
+	background: rgba(0, 0, 0, 0.6);
 }
 
 /* quan passam mouse sobre barra controls vídeo, apareix */
