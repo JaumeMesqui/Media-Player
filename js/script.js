@@ -1,150 +1,227 @@
-//Creació del element Video (Reproductor de Media)
-var video = document.createElement("video");
-video.setAttribute('class',"video"); 
-video.setAttribute('poster',"media/poster.jpg"); 
+//VAR Globals
+//let totalTracks = ["vtt/dades.vtt"];
 
-//Fonts del video
-var sourceMP4 = document.createElement("source");
-sourceMP4.setAttribute('src',"media/sabana.mp4"); 
-sourceMP4.setAttribute('type',"video/mp4"); 
+document.addEventListener("DOMContentLoaded", function () {
+    init();
+    inserirTracks();
 
-var sourceOGG = document.createElement("source");
-sourceOGG.setAttribute('src',"media/sabana.ogg"); 
-sourceOGG.setAttribute('type',"video/ogg");
+})
 
-var textAlt = document.createTextNode("Your browser does not support the video tag.");
+function init() {
+    //Creació del element Video (Reproductor de Media)
+    var video = document.createElement("video");
+    video.setAttribute('class', "video");
+    video.setAttribute('poster', "media/poster.jpg");
 
-//Afegir les fonts y el text al video
-video.appendChild(sourceMP4);
-video.appendChild(sourceOGG);
-video.appendChild(textAlt); 
+    //Fonts del video
+    var sourceMP4 = document.createElement("source");
+    sourceMP4.setAttribute('src', "media/sabana.mp4");
+    sourceMP4.setAttribute('type', "video/mp4");
 
-//Afegir el video al Index
-document.getElementById("videoPlayer").appendChild(video);
+    var sourceOGG = document.createElement("source");
+    sourceOGG.setAttribute('src', "media/sabana.ogg");
+    sourceOGG.setAttribute('type', "video/ogg");
 
-//Creació de barra progrés, els botons Play and pause / barra volumen / temps video --> playerControls
-var playerControls = document.createElement("div");
-playerControls.setAttribute('class',"player-controls"); 
+    var textAlt = document.createTextNode("Your browser does not support the video tag.");
 
-//Creació de barra progrés
-var barraProgres = document.createElement("div");
-barraProgres.setAttribute('class',"video-progress"); 
+    //Afegir les fonts y el text al video
+    video.appendChild(sourceMP4);
+    video.appendChild(sourceOGG);
+    video.appendChild(textAlt);
 
-var progresCompletat = document.createElement("div");
-progresCompletat.setAttribute('class',"video-progress-filled");
+    //Afegir el video al Index
+    document.getElementById("videoPlayer").appendChild(video);
 
-barraProgres.appendChild(progresCompletat);
-playerControls.appendChild(barraProgres);
+    //Creació de barra progrés, els botons Play and pause / barra volumen / temps video --> playerControls
+    var playerControls = document.createElement("div");
+    playerControls.setAttribute('class', "player-controls");
 
-//Creació botons Play and pause 
-var playButton = document.createElement("button");
-playButton.setAttribute('class',"play-button"); 
-playButton.setAttribute('title',"Play");
-var texto = document.createTextNode('►');
-playButton.appendChild(texto);
+    //Creació de barra progrés
+    var barraProgres = document.createElement("div");
+    barraProgres.setAttribute('class', "video-progress");
 
-playerControls.appendChild(playButton);
+    var progresCompletat = document.createElement("div");
+    progresCompletat.setAttribute('class', "video-progress-filled");
 
-//Creació boto per avançar vídeo 10 s
-var forwardButton = document.createElement("button");
-forwardButton.setAttribute('class',"forward-button"); 
-forwardButton.setAttribute('title',"Play");
-var texto2 = document.createTextNode('+');
-forwardButton.appendChild(texto2);
+    barraProgres.appendChild(progresCompletat);
+    playerControls.appendChild(barraProgres);
 
-playerControls.appendChild(forwardButton);
+    //Creació botons Play and pause 
+    var playButton = document.createElement("button");
+    playButton.setAttribute('class', "play-button");
+    playButton.setAttribute('title', "Play");
+    var texto = document.createTextNode('►');
+    playButton.appendChild(texto);
 
+    playerControls.appendChild(playButton);
 
-//Creació de la barra del volumen
-var volumeRange = document.createElement("input");
-volumeRange.setAttribute('type',"range"); 
-volumeRange.setAttribute('class',"volume");
-volumeRange.setAttribute('min',"0"); 
-volumeRange.setAttribute('max',"1");
-volumeRange.setAttribute('step',"0.01");
-volumeRange.setAttribute('value',"1");
+    //Creació boto per avançar vídeo 10 s
+    var forwardButton = document.createElement("button");
+    forwardButton.setAttribute('class', "forward-button");
+    forwardButton.setAttribute('title', "Play");
+    var texto2 = document.createTextNode('+');
+    forwardButton.appendChild(texto2);
 
-//Afegir la barra del volumen als playerControls
-playerControls.appendChild(volumeRange);
+    playerControls.appendChild(forwardButton);
 
 
-//Creació del valors del temps del video
-var valorTemps = document.createElement("div");
-valorTemps.setAttribute('class',"time");
+    //Creació de la barra del volumen
+    var volumeRange = document.createElement("input");
+    volumeRange.setAttribute('type', "range");
+    volumeRange.setAttribute('class', "volume");
+    volumeRange.setAttribute('min', "0");
+    volumeRange.setAttribute('max', "1");
+    volumeRange.setAttribute('step', "0.01");
+    volumeRange.setAttribute('value', "1");
 
-//Temps actual
-var tempsActual = document.createElement("span");
-tempsActual.setAttribute('class',"current");
-var texto2 = document.createTextNode('0:00-');
-tempsActual.appendChild(texto2);
-
-valorTemps.appendChild(tempsActual);
-
-//Duració Temps 
-var duracioTemps = document.createElement("span");
-duracioTemps.setAttribute('class',"duration");
-var texto3 = document.createTextNode(' 0:00');
-duracioTemps.appendChild(texto3);
-
-valorTemps.appendChild(duracioTemps);
+    //Afegir la barra del volumen als playerControls
+    playerControls.appendChild(volumeRange);
 
 
-//Afegir valor temps video als playerControls
-playerControls.appendChild(valorTemps);
+    //Creació del valors del temps del video
+    var valorTemps = document.createElement("div");
+    valorTemps.setAttribute('class', "time");
 
+    //Temps actual
+    var tempsActual = document.createElement("span");
+    tempsActual.setAttribute('class', "current");
+    tempsActual.setAttribute('ID', "tA");
+    var texto2 = document.createTextNode('0:00-');
+    tempsActual.appendChild(texto2);
 
-//Afegir els player controls a l'Index
-document.getElementById("videoPlayer").appendChild(playerControls);
+    valorTemps.appendChild(tempsActual);
 
+    //Duració Temps 
+    var duracioTemps = document.createElement("span");
+    duracioTemps.setAttribute('class', "duration");
+    duracioTemps.setAttribute('ID', "dT");
+    var texto3 = document.createTextNode(' 0:00');
+    duracioTemps.appendChild(texto3);
 
-//Funció per fer Play and pause al playButton
-playButton.addEventListener("click", (e) =>{ //per errors
-    if(video.paused){
-        video.play();
-        e.target.textContent = "❚❚";
-        playButton.setAttribute('title',"Pause");
-    }else{
-        video.pause();
-        e.target.textContent = "►";
-        playButton.setAttribute('title',"Play");
-    }
-        
-});
+    valorTemps.appendChild(duracioTemps);
 
+    //Afegir valor temps video als playerControls
+    playerControls.appendChild(valorTemps);
 
-//Volumen
-volumeRange.addEventListener("mousemove", (e) =>{
-    video.volume = e.target.value; //li donam al vídeo el volumen que hi hagi seleccionat a la barra de volumen
-});
+    //Afegir els player controls a l'Index
+    document.getElementById("videoPlayer").appendChild(playerControls);
 
+    //Funció per fer Play and pause al playButton
+    playButton.addEventListener("click", (e) => { //per errors
+        if (video.paused) {
+            video.play();
+            e.target.textContent = "❚❚";
+            playButton.setAttribute('title', "Pause");
+        } else {
+            video.pause();
+            e.target.textContent = "►";
+            playButton.setAttribute('title', "Play");
+        }
+
+    });
+
+    //Volumen
+    volumeRange.addEventListener("mousemove", (e) => {
+        video.volume = e.target.value; //li donam al vídeo el volumen que hi hagi seleccionat a la barra de volumen
+    });
+
+    video.addEventListener("timeupdate", currentTime);
+
+    //eventListener que va pintant la barra de progrés a mesura que es va reproduint el vídeo
+    video.addEventListener("timeupdate", () => {
+        const percentatge = (video.currentTime / video.duration) * 100;
+        progresCompletat.style.width = `${percentatge}%`
+    });
+
+    //canviar la barra de progrés si clicam
+    barraProgres.addEventListener("click", (e) => {
+        const tempsAvanzado = (e.offsetX / barraProgres.offsetWidth) * video.duration;
+        video.currentTime = tempsAvanzado;
+    });
+
+    //adelantar vídeo 10 s
+    forwardButton.addEventListener("click", (e) => {
+        video.currentTime = video.currentTime + 10;
+    });
+
+    
+    
+}
 
 //Current time and duration video
-function currentTime(){
-    var currentMinutes = Math.floor(video.currentTime/60);
-    var currentSeconds = Math.floor(video.currentTime - currentMinutes * 60); 
+function currentTime() {
+    var video = document.querySelector('video');
+    var currentMinutes = Math.floor(video.currentTime / 60);
+    var currentSeconds = Math.floor(video.currentTime - currentMinutes * 60);
     var durationMinutes = Math.floor(video.duration / 60);
     var durationSeconds = Math.floor(video.duration - durationMinutes * 60);
 
-    tempsActual.innerHTML = `${currentMinutes }:${ currentSeconds < 10 ? "0"+currentSeconds : currentSeconds}-`;
-    duracioTemps.innerHTML = `${durationMinutes }:${ durationSeconds}`;
+    var tempsActual = document.getElementById("tA");
+    var duracioTemps = document.getElementById("dT");
+    tempsActual.innerHTML = `${currentMinutes}:${currentSeconds < 10 ? "0" + currentSeconds : currentSeconds}-`;
+    duracioTemps.innerHTML = `${durationMinutes}:${durationSeconds}`;
 }
 
-video.addEventListener("timeupdate", currentTime);
 
+function inserirTracks() {
 
-//eventListener que va pintant la barra de progrés a mesura que es va reproduint el vídeo
-video.addEventListener("timeupdate", () =>{
-    const percentatge = (video.currentTime/ video.duration)* 100;
-    progresCompletat.style.width = `${percentatge}%`
-});
+    var video = document.querySelector('video');
 
-//canviar la barra de progrés si clicam
-barraProgres.addEventListener("click", (e) =>{
-    const tempsAvanzado = (e.offsetX / barraProgres.offsetWidth) * video.duration;
-    video.currentTime = tempsAvanzado;
-});
+    video.addEventListener("loadedmetadata", function() {
 
-//adelantar vídeo 10 s
-forwardButton.addEventListener("click", (e) =>{
-    video.currentTime= video.currentTime+10;
-});
+        var track = document.createElement("track");
+        track.kind = "subtitles";
+        track.label = "subtitols";
+        track.srclang = "es";
+        track.src = "vtt/sub.vtt";
+        track.addEventListener("load", function() {
+           this.mode = "showing";
+           video.textTracks[0].mode = "showing"; // thanks Firefox
+        });
+        this.appendChild(track);
+        //obtenirDades();
+     });
+
+}
+
+function obtenirDades() {
+    var video = document.querySelector('video');
+
+    var tracks = video.textTracks; 
+    console.log(tracks);
+
+    for (var i = 0, L = tracks.length; i < L; i++) { 
+
+        /*
+        textTrack.oncuechange = function (){
+            // "this" is a textTrack
+            var cue = this.activeCues[0]; // assuming there is only one
+            active cue
+            var obj = JSON.parse(cue.text);
+            // do something
+        }
+        */
+
+        var ques = tracks[i].cues;
+        console.log(ques)
+        for (var i = 0, L = ques.length; i < L; i++) { 
+            
+            var data = JSON.parse(ques[i]);
+
+            ques[i].onenter = function(){
+                // do somethingç
+                analizarCue(data);
+            };
+
+            ques[i].onexit = function(){
+                // do something else
+            };
+
+        }
+    }
+
+}
+
+function analizarCue(data){
+    console.log(data.nom);
+}
