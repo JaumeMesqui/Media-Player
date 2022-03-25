@@ -3,7 +3,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     init();
-    inserirTracks();
+    //inserirTracks();
 
 })
 
@@ -144,8 +144,6 @@ function init() {
         video.currentTime = video.currentTime + 10;
     });
 
-    
-    
 }
 
 //Current time and duration video
@@ -167,19 +165,20 @@ function inserirTracks() {
 
     var video = document.querySelector('video');
 
+
     video.addEventListener("loadedmetadata", function() {
 
         var track = document.createElement("track");
-        track.kind = "subtitles";
+        track.kind = "captions";
         track.label = "subtitols";
         track.srclang = "es";
-        track.src = "vtt/sub.vtt";
+        track.src = "vtt/dades.vtt";
         track.addEventListener("load", function() {
            this.mode = "showing";
            video.textTracks[0].mode = "showing"; // thanks Firefox
         });
         this.appendChild(track);
-        //obtenirDades();
+        obtenirDades();
      });
 
 }
@@ -188,27 +187,35 @@ function obtenirDades() {
     var video = document.querySelector('video');
 
     var tracks = video.textTracks; 
-    console.log(tracks);
-
     for (var i = 0, L = tracks.length; i < L; i++) { 
-
-        /*
-        textTrack.oncuechange = function (){
+        tracks[i] = video.addTextTrack("subtitles", "subtitols", "es");
+        tracks[i].mode = "showing";
+        tracks[i].oncuechange = function (){
             // "this" is a textTrack
             var cue = this.activeCues[0]; // assuming there is only one
-            active cue
-            var obj = JSON.parse(cue.text);
-            // do something
-        }
-        */
+            var data = JSON.parse(cue.text);
+            console.log(cue.text);
+            cue.onenter = function(){
+                console.log("hola")
+                // do somethingç
+                analizarCue(data);
+            };
 
+            cue.onexit = function(){
+                // do something else
+            };
+        }
+        
         var ques = tracks[i].cues;
-        console.log(ques)
-        for (var i = 0, L = ques.length; i < L; i++) { 
+        console.log(ques);
+        console.log(ques.length);
+/*
+        for (var i = 0; i < ques.length; i++) { 
             
             var data = JSON.parse(ques[i]);
 
             ques[i].onenter = function(){
+
                 // do somethingç
                 analizarCue(data);
             };
@@ -218,6 +225,7 @@ function obtenirDades() {
             };
 
         }
+        */
     }
 
 }

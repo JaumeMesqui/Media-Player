@@ -173,50 +173,62 @@ input[type="range"]::-webkit-slider-runnable-track {
 	width: 950px;
 	margin:auto;
 	margin-bottom: 20px;
-	background: rgba(145, 221, 235, 0.4);
+	background: #f8f9fa;
 	padding: 10px 20px;
 	box-sizing: border-box;
-	border-radius: 10px;
 	display: flex;
-  justify-content: center;
+	flex-direction: row;
+    justify-content: center;
+	align-content: center;
+	flex-wrap: wrap;
 	
 }
 /*https://ebweb.es/cajas-de-colores-con-html-y-css/ */
-.titolForm{
+.titolFormulari{
 	width:80%;
-	background:#be8af0c5;
+	background: #f7f5f5; 
 	color:rgb(0, 0, 0); 
-	font-weight:bold; 
-	padding:15px;
-	border:3px solid #6704c3f1; 
-	margin-top:40px; 
-	margin-bottom:40px; 
-	text-align:center; 
-	font-size:22px; 
+	font-weight: bold; 
+	margin-bottom: 10px;
+	padding: 15px; 
+	border:2px solid #006D77;
+	text-align:left; 
+	font-size:19px; 
 	border-radius:10px;
-	display: inline-block;
 }
+
 .botonsEditar {
-	width: 10%;
-	background:#be8af0c5;
-	color:rgb(0, 0, 0); 
+	width: 7%;
+	background:#63AFAD;
+	color:rgb(255, 255, 255); 
 	font-weight:bold; 
+	margin-bottom: 10px;
 	padding:15px;
-	border:3px solid #6704c3f1; 
-	margin-top:40px; 
-	margin-bottom:40px; 
+	border:3px solid #006D77; 
 	margin-left:10px; 
 	text-align:center; 
 	font-size:22px; 
 	border-radius:10px;
-	display: inline-block;
 	
 }
 
 .botonsEditar:hover{
 	cursor: pointer;
-
 }
+
+.llistaForm{
+	width:70%;
+	background: #f7f5f5; 
+	font-weight: bold; 
+	margin-bottom: 10px;
+	padding: 15px; 
+	border-left:8px solid #00636C; 
+	border-top-left-radius:8px; 
+	border-bottom-left-radius:8px;
+}
+
+
+
 
 
 /* formulari per editar*/
