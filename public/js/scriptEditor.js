@@ -1,3 +1,13 @@
+document.addEventListener("DOMContentLoaded", function () {
+   // init();
+   // inserirTracks();
+
+})
+
+
+
+/* regio editor principal */
+/************************************************************************************************************************ */
 //Regió on hi haurà el menú principal de l'editor
 var editorPrincipal = document.createElement("div");
 editorPrincipal.setAttribute('class', "contigutEditor");
@@ -40,6 +50,7 @@ for (var i = 0; i < 3; i++) {
     editarVtt.addEventListener("click", (e) => {
         document.getElementById("editor").removeChild(editorPrincipal);
         document.getElementById("editor").appendChild(editorSecundariCues);
+        rellenarCampsVtt();
     });
 
      //botó per borrar un vtt
@@ -56,7 +67,10 @@ for (var i = 0; i < 3; i++) {
 document.getElementById("editor").appendChild(editorPrincipal);
 
 
-/* ************************************ */
+
+/* regio editor secundari */
+/************************************************************************************************************************ */
+
 //Creació del elements del formulari
 
 var editorSecundariCues = document.createElement("div");
@@ -88,6 +102,13 @@ form3.setAttribute('nombre', "dadaX");
 form3.setAttribute('placeholder', "dadaX");
 formulari.appendChild(form3);
 
+//Funció que rellena els camps del formulari si s'ha clicat el botó d'editar
+function rellenarCampsVtt(){
+    form1.setAttribute('value', "Hannah Montana");
+    form2.setAttribute('value', "Metadades");
+    form3.setAttribute('value', "Descripcio o algo");
+}
+
 editorSecundariCues.appendChild(formulari);
 
 //opcio principal editor
@@ -101,6 +122,7 @@ editorSecundariCues.appendChild(crearNouCue);
 var afegirCue = document.createElement("button");
 afegirCue.setAttribute('type', "button");
 afegirCue.setAttribute('class', "botonsEditar");
+afegirCue.setAttribute('id', "afegirNovaCue");
 var iconoPlus = document.createElement("i");
 iconoPlus.setAttribute('class', "fa-solid fa-plus");
 afegirCue.appendChild(iconoPlus);
@@ -151,12 +173,54 @@ seccioBotons.appendChild(botoCancelar);
 
 var botoAcceptar = document.createElement("input");
 botoAcceptar.setAttribute('type', "button");
-botoAcceptar.setAttribute('value', "Confirmar");
-botoAcceptar.setAttribute('id', "botoAcceptar");
+botoAcceptar.setAttribute('value', "Guardar");
+botoAcceptar.setAttribute('id', "botoGuardar");
 botoAcceptar.setAttribute('class', "botoFormulari");
 seccioBotons.appendChild(botoAcceptar);
 
 editorSecundariCues.appendChild(seccioBotons);
+
+
+
+
+/* ******************************************************************************** */
+//Creació del elements del formulari de crear nova CUE
+
+var editorAfegirNovaCue = document.createElement("div");
+editorAfegirNovaCue.setAttribute('class', "contigutEditor");
+
+var formulariNovaCue = document.createElement("form");
+formulariNovaCue.setAttribute('action', "");
+
+var titolEditorAfegirCues = document.createElement("h2");
+var text8 = document.createTextNode("DADES SOBRE LA NOVA CUE:");
+titolEditorAfegirCues.appendChild(text8);
+formulariNovaCue.appendChild(titolEditorAfegirCues);
+
+var form1 = document.createElement("input");
+form1.setAttribute('type', "text");
+form1.setAttribute('nombre', "nomArxiu");
+form1.setAttribute('placeholder', "Identificador de la CUE");
+//form1.setAttribute('value', "Hannah Montana");
+formulariNovaCue.appendChild(form1);
+
+var form2 = document.createElement("input");
+form2.setAttribute('type', "text");
+form2.setAttribute('nombre', "tipusVTT");
+form2.setAttribute('placeholder', "Minut inicial CUE");
+//form2.setAttribute('value', "Metadades");
+formulariNovaCue.appendChild(form2);
+
+var form3 = document.createElement("input");
+form3.setAttribute('type', "text");
+form3.setAttribute('nombre', "dadaX");
+form3.setAttribute('placeholder', "Minut final CUE");
+//form3.setAttribute('value', "Descripcio o algo");
+formulariNovaCue.appendChild(form3);
+
+editorAfegirNovaCue.appendChild(formulariNovaCue);
+
+
 
 
 //Funció per obrir el formulari quan clicam al botó "+" o al botó d'editar "llapis"
@@ -165,11 +229,16 @@ afegirVtt.addEventListener("click", (e) => {
     document.getElementById("editor").appendChild(editorSecundariCues);
 });
 
+//Funció per obrir el formulari de crear nova CUE quan clicam al botó "+" de l'editor secundari
+afegirCue.addEventListener("click", (e) => {
+    document.getElementById("editor").removeChild(editorSecundariCues);
+    document.getElementById("editor").appendChild(editorAfegirNovaCue);
+});
 
 
 //Funció per eliminar el formulari de l'Index
 botoCancelar.addEventListener("click", (e) => {
-    document.getElementById("editorCues").removeChild(editorSecundariCues);
+    document.getElementById("editor").removeChild(editorSecundariCues);
     document.getElementById("editor").appendChild(editorPrincipal);
 });
 
