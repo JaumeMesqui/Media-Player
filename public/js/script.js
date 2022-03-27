@@ -1,10 +1,9 @@
 //VAR Globals
-let totalTracks = ["dades.vtt"];
+let totalTracks = [];
 
 document.addEventListener("DOMContentLoaded", function () {
     init();
-   // inserirTracks();
-
+    solicitarDades();
 })
 
 function init() {
@@ -160,51 +159,141 @@ function currentTime() {
     duracioTemps.innerHTML = `${durationMinutes}:${durationSeconds}`;
 }
 
+function solicitarDades() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "dades";
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var dades = xmlhttp.responseText;
+            totalTracks = dades;
+            totalTracks = dades.split('"');
+
+            for (var i = 0; i < totalTracks.length; i++) {
+                totalTracks.splice(i, 1);
+            }
+            
+            inserirTracks();
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
 function inserirTracks() {
 
     var video = document.querySelector('video');
-
+    console.log(totalTracks);
 
     video.addEventListener("loadedmetadata", function () {
 
-        var track = document.createElement("track");
-        track.kind = "captions";
-        track.label = "subtitols";
-        track.srclang = "es";
-        track.src = "vtt/dades.vtt";
-        track.addEventListener("load", function () {
-            this.mode = "showing";
-            video.textTracks[0].mode = "showing"; // thanks Firefox
-            obtenirDades();
-        });
-        this.appendChild(track);
+        for (var i = 0; i < totalTracks.length; i++) {
+
+            var track = document.createElement("track");
+            track.setAttribute('default', true);
+
+            if (totalTracks[i] == "dades.vtt") {
+                track.setAttribute('kind', "metadata");
+                track.setAttribute('src', "vtt/dades.vtt");
+                track.setAttribute('label', "dades");
+            } else if (totalTracks[i] == "sub.vtt") {
+                track.setAttribute('kind', "subtitles");
+                track.setAttribute('src', "vtt/sub.vtt");
+                track.setAttribute('label', "subtitols");
+                track.setAttribute('srclang', "es");
+            } else if (totalTracks[i] == "chapters.vtt") {
+                track.setAttribute('kind', "chapters");
+                track.setAttribute('src', "vtt/chapters.vtt");
+                track.setAttribute('label', "chapter");
+            } else if (totalTracks[i] == "captions.vtt") {
+                track.setAttribute('kind', "captions");
+                track.setAttribute('src', "vtt/captions.vtt");
+                track.setAttribute('label', "caption");
+            } else if (totalTracks[i] == "descriptions.vtt") {
+                track.setAttribute('kind', "descriptions");
+                track.setAttribute('src', "vtt/descriptions.vtt");
+                track.setAttribute('label', "description");
+            }
+
+            track.addEventListener("load", function () {
+                this.mode = "showing";
+                video.textTracks[0].mode = "showing"; // thanks Firefox
+                obtenirDades(this);
+            });
+
+            video.appendChild(track);
+        }
     });
 
 }
 
-function obtenirDades() {
+function obtenirDades(track) {
+    
     var video = document.querySelector('video');
+    var aTrack;
 
-    var tracks = video.textTracks;
-    for (var i = 0, L = tracks.length; i < L; i++) {
-        tracks[i] = video.addTextTrack("metadata", "subtitols", "es");
-        tracks[i].mode = "hidden";
+    for(var i = 0; i < video.textTracks.length ; i++){
+        if(video.textTracks[i].label == track.label){
+            aTrack = video.textTracks[i];
+        }
+    }
 
-        //Cas en es que se modifica el currentTime del video
-        tracks[i].oncuechange = function () {
-            var cue = this.activeCues[0];
+    //Maybe var global
+    var haySubtitols = false;
+    var hayCaptions = false;
+
+    if (aTrack.label == "subtitols" && !hayCaptions) {
+        aTrack.mode = "showing";
+        haySubtitols = true;
+    } else if (aTrack.label == "captions" && !haySubtitols) {
+        aTrack.mode = "showing";
+        hayCaptions = true;
+    } else {
+        aTrack.mode = "hidden";
+    }
+
+    //Cas en es que se modifica el currentTime del video
+    if (aTrack.label != "subtitols" && aTrack.label != "captions") {
+
+        aTrack.oncuechange = function () {   
+            var cue = this.activeCues[0];   
             if (cue != undefined) {
                 var data = JSON.parse(cue.text);
-                posarInfo(data);
+                if (track.label == "dades") {
+                    posarInfoMetadades(data);
+                } else if (track.label == "chapters") {
+                    posarInfoChapters(data);
+                } else if (track.label == "descriptions") {
+                    posarInfoDesc(data);
+                }
             } else {
                 borrarInfo();
             }
         }
+
     }
 
 }
 
-function posarInfo(data) {
+//Aqui falta procesar cada info
+function posarInfoMetadades(data) {
+    console.log(data.nom);
+    var info1 = document.getElementById("info1");
+    var contingutInfo1 = document.createElement("h3");
+    var textInfo1 = document.createTextNode(data.nom);
+    contingutInfo1.appendChild(textInfo1);
+    info1.appendChild(contingutInfo1);
+}
+
+function posarInfoChapters(data) {
+    console.log(data.nom);
+    var info1 = document.getElementById("info1");
+    var contingutInfo1 = document.createElement("h3");
+    var textInfo1 = document.createTextNode(data.nom);
+    contingutInfo1.appendChild(textInfo1);
+    info1.appendChild(contingutInfo1);
+}
+
+function posarInfoDesc(data) {
     console.log(data.nom);
     var info1 = document.getElementById("info1");
     var contingutInfo1 = document.createElement("h3");
@@ -214,7 +303,7 @@ function posarInfo(data) {
 }
 
 function borrarInfo() {
-    console.log("borrar");
+    //console.log("borrar");
     var info1 = document.getElementById("info1");
     while (info1.firstChild) {
         info1.removeChild(info1.firstChild);
