@@ -173,7 +173,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 	width: 950px;
 	margin:auto;
 	margin-bottom: 20px;
-	background: #f8f9fa;
+	/*background: #f8f9fa;*/
 	padding: 10px 20px;
 	box-sizing: border-box;
 	display: flex;
@@ -237,7 +237,7 @@ form {
 	width: 950px;
 	margin:auto;
 	margin-bottom: 20px;
-	background: rgba(0, 0, 0, 0.2);
+	background:#e6e8eb;
 	padding: 10px 20px;
 	box-sizing: border-box;
 	border-radius: 10px;

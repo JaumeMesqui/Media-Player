@@ -3,7 +3,7 @@ let totalTracks = ["dades.vtt"];
 
 document.addEventListener("DOMContentLoaded", function () {
     init();
-    inserirTracks();
+   // inserirTracks();
 
 })
 
