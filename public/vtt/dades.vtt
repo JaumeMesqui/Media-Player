@@ -1,25 +1,140 @@
 WEBVTT
 
-NOTE
-Dades tope guapes
-
 1
-00:00:01.000 --> 00:00:04.000
+00:00:00.000 --> 00:00:25.500
 {
- "nom": "Daddy Yankee",
- "nacionalitat": "Puerto Rico"
+    "artista": {
+        "nom": "Amaia",
+        "origen": "spain",
+        "id-spotify": "1WLEfsQjvgtFSGkrHonzFX"
+    },
+    "canço": {
+        "nom": "Yamaguchi",
+        "genere": "Pop",
+        "album": "Yamaguchi" 
+    },
+    "questionari": {
+        "pregunta": "Gràcies a quin programa televisiu va nacionalment coneguda aquesta artista?",
+        "opcions": [
+            "Gran Hermano",
+            "Operación Triunfo",
+            "Got Talent"
+        ],
+        "Correcte": 1
+    }
 }
 
 2
-00:06.250 --> 00:08.000
+00:00:25.500 --> 00:01:00.500
 {
- "nom": "Aitana",
- "nacionalitat": "Españita"
+    "artista": {
+        "nom": "Ana Mena",
+        "origen": "spain",
+        "id-spotify": "6k8mwkKJKKjBILo7ypBspl"
+    },
+    "canço": {
+        "nom": "Música Ligera",
+        "genere": "Pop"
+    },
+    "questionari": {
+        "pregunta": "A quin any va llançar-se la cançó?",
+        "opcions": [
+            "2020",
+            "2022",
+            "2021"
+        ],
+        "Correcte": 2 
+    }
 }
 
 3
-00:08.250 --> 00:12.000
+00:01:00.500 --> 00:01:39.500
 {
- "nom": "Ed Sheeran",
- "nacionalitat": "UK"
+    "artista": {
+        "nom": "Bad Gyal",
+        "origen": "spain",
+        "id-spotify": "4F4pp8NUW08JuXwnoxglpN"
+    },
+    "canço": {
+        "nom": "Flow 2000",
+        "genere": "Urbano latino"
+    },
+    "questionari": {
+        "pregunta": "Quin altre cantant participa en la cançó?",
+        "opcions": [
+            "Beny Jr",
+            "Morad",
+            "Nach Scratch"
+        ],
+        "Correcte": 0
+    }
+}
+
+4
+00:01:39.500 --> 00:02:08.000
+{
+    "artista": {
+        "nom": "Billie Eilish",
+        "origen": "eeuu",
+        "id-spotify": "6qqNVTkY8uBg9cP3Jd7DAH"
+    },
+    "canço": {
+        "nom": "idontwannabeyouanymore",
+        "genere": "Indie"
+    },
+    "questionari": {
+        "pregunta": "A quin estudi actua Billie Eilish en aquest videoclip?",
+        "opcions": [
+            "COLORSXSTUDIOS",
+            "Tiny Desk Concert",
+            "Gallery Sessions"
+        ],
+        "Correcte": 0 
+    }
+}
+
+5
+00:02:08.000 --> 00:02:44.800
+{
+    "artista": {
+        "nom": "Cruz Cafuné",
+        "origen": "spain",
+        "id-spotify": "0jeYkqwckGJoHQhhXwgzk3"
+    },
+    "canço": {
+        "nom": "2 segundos",
+        "genere": "Rap/R&B"
+    },
+    "questionari": {
+        "pregunta": "Quins nombres repeteix l'artista en les seves cançons fent referencia al prefixe de les Illes Canaries",
+        "opcions": [
+            "922 i 908",
+            "922 i 928",
+            "932 i 938"
+        ],
+        "Correcte": 1
+    }
+}
+
+6
+00:02:44.800 --> 00:03:14.000
+{
+    "artista": {
+        "nom": "Trueno",
+        "origen": "argentina",
+        "id-spotify": "2x7PC78TmgqpEIjaGAZ0Oz"
+    },
+    "canço": {
+        "nom": "Dance Crip",
+        "genere": "Urbano latino"
+    },
+    "questionari": {
+        "pregunta": "A quin any va guanyar la Red Bull Batalla de los Gallos Nacional Argentina?",
+        "opcions": [
+            "2018",
+            "2016",
+            "2019"
+        ],
+        "Correcte": 2 
+    }
 }
